@@ -1,0 +1,14 @@
+{
+    "name": "wecom/tpackage",
+    "description": "package demo",
+    "type": "php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "guanhui07",
+            "email": "guanhui07@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
