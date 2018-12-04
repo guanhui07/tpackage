@@ -1,7 +1,7 @@
 <!-- Main Header -->
 <header class="main-header">
 @php
-    Admin::user()->avatar = '/default.jpg';
+    //Admin::user()->avatar = '/default.jpg';
 @endphp
     <!-- Logo -->
     <a href="{{ admin_base_path('/') }}" class="logo">
