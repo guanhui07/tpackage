@@ -1,6 +1,8 @@
 <!-- Main Header -->
 <header class="main-header">
-
+@php
+    Admin::user()->avatar = '/default.jpg';
+@endphp
     <!-- Logo -->
     <a href="{{ admin_base_path('/') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -31,7 +33,7 @@
                         <!-- The user image in the navbar-->
                         <img src="{{ Admin::user()->avatar }}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">{{ Admin::user()->name }}</span>
+                        <span class="hidden-xs">{{ Admin::user()->username }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
@@ -39,13 +41,13 @@
                             <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
 
                             <p>
-                                {{ Admin::user()->name }}
+                                {{ Admin::user()->username }}
                                 <small>Member since admin {{ Admin::user()->created_at }}</small>
                             </p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ admin_base_path('auth/setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
+                                <a href="{{ admin_base_path('usersetting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ admin_base_path('auth/logout') }}" class="btn btn-default btn-flat">{{ trans('admin.logout') }}</a>

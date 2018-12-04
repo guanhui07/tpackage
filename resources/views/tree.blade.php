@@ -4,10 +4,10 @@
 
         <div class="btn-group">
             <a class="btn btn-primary btn-sm {{ $id }}-tree-tools" data-action="expand" title="{{ trans('admin.expand') }}">
-                <i class="fa fa-plus-square-o"></i>&nbsp;{{ trans('admin.expand') }}
+                <i class="fa fa-plus-square-o"></i><span class="hidden-xs">&nbsp;{{ trans('admin.expand') }}</span>
             </a>
             <a class="btn btn-primary btn-sm {{ $id }}-tree-tools" data-action="collapse" title="{{ trans('admin.collapse') }}">
-                <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin.collapse') }}
+                <i class="fa fa-minus-square-o"></i><span class="hidden-xs">&nbsp;{{ trans('admin.collapse') }}</span>
             </a>
         </div>
 

@@ -9,7 +9,7 @@
                 <img src="{{ Admin::user()->avatar }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>{{ Admin::user()->name }}</p>
+                <p>{{ Admin::user()->username }}</p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('admin.online') }}</a>
             </div>
@@ -29,7 +29,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">{{ trans('admin.menu') }}</li>
+            <!--<li class="header">{{ trans('admin.menu') }}11</li>-->
 
             @each('admin::partials.menu', Admin::menu(), 'item')
 
