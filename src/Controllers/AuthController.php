@@ -25,8 +25,8 @@ class AuthController extends Controller
         if ($this->guard()->check()) {
             return redirect($this->redirectPath());
         }
-
-        return view('admin::login');
+        header("Location:/weblogin");
+        //return view('admin::login');
     }
 
     /**
