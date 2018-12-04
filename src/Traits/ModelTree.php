@@ -229,16 +229,13 @@ trait ModelTree
     /**
      * Get options for Select field in form.
      *
-     * @param \Closure|null $closure
-     * @param string        $rootText
-     *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
-    public static function selectOptions(\Closure $closure = null, $rootText = 'Root')
+    public static function selectOptions()
     {
-        $options = (new static())->withQuery($closure)->buildSelectOptions();
+        $options = (new static())->buildSelectOptions();
 
-        return collect($options)->prepend($rootText, 0)->all();
+        return collect($options)->prepend('Root', 0)->all();
     }
 
     /**

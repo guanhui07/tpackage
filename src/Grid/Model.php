@@ -538,11 +538,6 @@ class Model
             $relation = $this->model->$relationName();
 
             $this->queries->push([
-                'method'    => 'select',
-                'arguments' => [$this->model->getTable().'.*'],
-            ]);
-
-            $this->queries->push([
                 'method'    => 'join',
                 'arguments' => $this->joinParameters($relation),
             ]);

@@ -322,17 +322,18 @@ SCRIPT;
      *
      * @param array $items
      */
-	public function getItems()
+    public function getItems()
     {
+        //echo request('tid');die;
         $uri = request()->server()['REQUEST_URI'];
-
-        if(starts_with( $uri,'/admin/shop/category')) {
+			if(starts_with( $uri,'/admin/shop/category')) {
             $tid       = request('tid', 25);
             $cache_key = 'pre_cache_getCategory_Items';
-            $arr       = $this->getCache($cache_key,true);
+            $arr       = $this->getCache($cache_key);
+            //dd($arr);
             if ( !$arr) {
                 $arr = $this->model->withQuery($this->queryCallback)->toTree();//test
-                $this->setCache($cache_key, $arr, 10);//2
+                $this->setCache($cache_key, $arr, 2);
             }
             $arr = collect($arr)->map(function ($item) use ($tid) {
                 if ($item['id'] == $tid) {
@@ -345,29 +346,9 @@ SCRIPT;
                 }
             }
 
+            //dd($arr);
             return $arr;
-        } elseif(starts_with( $uri,'/admin/trade/category')) {
-                $tid       = request('tid', 1);
-                $cache_key = 'pre_cache_getTradeCategory_Items';
-                $arr       = $this->getCache($cache_key,true);
-                if ( !$arr) {
-                    $arr = $this->model->withQuery($this->queryCallback)->toTree();//test
-                    $this->setCache($cache_key, $arr, 2);
-                }
-                $arr = collect($arr)->map(function ($item) use ($tid) {
-                    //if ($item['id'] == $tid) {
-                        return $item;
-                    //}
-                })->toArray();
-                foreach ($arr as $k => $v) {
-                    if ( !is_array($v)) {
-                        unset($arr[$k]);
-                    }
-                }
-
-                return $arr;
-
-        }else {
+        } else {
             return $this->model->withQuery($this->queryCallback)->toTree();
         }
     }

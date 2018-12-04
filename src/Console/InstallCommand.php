@@ -2,6 +2,7 @@
 
 namespace Encore\Admin\Console;
 
+use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
@@ -11,7 +12,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:install';
+    protected $name = 'admin:install';
 
     /**
      * The console command description.
@@ -48,9 +49,7 @@ class InstallCommand extends Command
     {
         $this->call('migrate');
 
-        $userModel = config('admin.database.users_model');
-
-        if ($userModel::count() == 0) {
+        if (Administrator::count() == 0) {
             $this->call('db:seed', ['--class' => \Encore\Admin\Auth\Database\AdminTablesSeeder::class]);
         }
     }
@@ -76,7 +75,6 @@ class InstallCommand extends Command
         $this->makeDir('Controllers');
 
         $this->createHomeController();
-        $this->createAuthController();
         $this->createExampleController();
 
         $this->createBootstrapFile();
@@ -98,23 +96,6 @@ class InstallCommand extends Command
             str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
         );
         $this->line('<info>HomeController file was created:</info> '.str_replace(base_path(), '', $homeController));
-    }
-
-    /**
-     * Create AuthController.
-     *
-     * @return void
-     */
-    public function createAuthController()
-    {
-        $authController = $this->directory.'/Controllers/AuthController.php';
-        $contents = $this->getStub('AuthController');
-
-        $this->laravel['files']->put(
-            $authController,
-            str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
-        );
-        $this->line('<info>AuthController file was created:</info> '.str_replace(base_path(), '', $authController));
     }
 
     /**

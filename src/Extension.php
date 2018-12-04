@@ -2,6 +2,8 @@
 
 namespace Encore\Admin;
 
+use Encore\Admin\Auth\Database\Menu;
+use Encore\Admin\Auth\Database\Permission;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
@@ -210,15 +212,11 @@ abstract class Extension
      *
      * @return \Illuminate\Config\Repository|mixed
      */
-    public static function config($key = null, $default = null)
+    public static function config($key, $default = null)
     {
         $name = array_search(get_called_class(), Admin::$extensions);
 
-        if (is_null($key)) {
-            $key = sprintf('admin.extensions.%s', strtolower($name));
-        } else {
-            $key = sprintf('admin.extensions.%s.%s', strtolower($name), $key);
-        }
+        $key = sprintf('admin.extensions.%s.%s', strtolower($name), $key);
 
         return config($key, $default);
     }
@@ -301,11 +299,9 @@ abstract class Extension
      */
     protected static function createMenu($title, $uri, $icon = 'fa-bars', $parentId = 0)
     {
-        $menuModel = config('admin.database.menu_model');
+        $lastOrder = Menu::max('order');
 
-        $lastOrder = $menuModel::max('order');
-
-        $menuModel::create([
+        Menu::create([
             'parent_id' => $parentId,
             'order'     => $lastOrder + 1,
             'title'     => $title,
@@ -323,9 +319,7 @@ abstract class Extension
      */
     protected static function createPermission($name, $slug, $path)
     {
-        $permissionModel = config('admin.database.permissions_model');
-
-        $permissionModel::create([
+        Permission::create([
             'name'      => $name,
             'slug'      => $slug,
             'http_path' => '/'.trim($path, '/'),

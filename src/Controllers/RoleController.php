@@ -2,6 +2,8 @@
 
 namespace Encore\Admin\Controllers;
 
+use Encore\Admin\Auth\Database\Permission;
+use Encore\Admin\Auth\Database\Role;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
@@ -81,9 +83,7 @@ class RoleController extends Controller
      */
     protected function grid()
     {
-        $roleModel = config('admin.database.roles_model');
-
-        $grid = new Grid(new $roleModel());
+        $grid = new Grid(new Role());
 
         $grid->id('ID')->sortable();
         $grid->slug(trans('admin.slug'));
@@ -118,9 +118,7 @@ class RoleController extends Controller
      */
     protected function detail($id)
     {
-        $roleModel = config('admin.database.roles_model');
-
-        $show = new Show($roleModel::findOrFail($id));
+        $show = new Show(Role::findOrFail($id));
 
         $show->id('ID');
         $show->slug(trans('admin.slug'));
@@ -141,16 +139,13 @@ class RoleController extends Controller
      */
     public function form()
     {
-        $permissionModel = config('admin.database.permissions_model');
-        $roleModel = config('admin.database.roles_model');
-
-        $form = new Form(new $roleModel());
+        $form = new Form(new Role());
 
         $form->display('id', 'ID');
 
         $form->text('slug', trans('admin.slug'))->rules('required');
         $form->text('name', trans('admin.name'))->rules('required');
-        $form->listbox('permissions', trans('admin.permissions'))->options($permissionModel::all()->pluck('name', 'id'));
+        $form->listbox('permissions', trans('admin.permissions'))->options(Permission::all()->pluck('name', 'id'));
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

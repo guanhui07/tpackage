@@ -12,7 +12,7 @@ class MenuCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:menu';
+    protected $name = 'admin:menu';
 
     /**
      * The console command description.

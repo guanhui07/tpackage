@@ -148,16 +148,6 @@ class Tools implements Renderable
     }
 
     /**
-     * Get parent form of tool.
-     *
-     * @return Builder
-     */
-    public function form()
-    {
-        return $this->form;
-    }
-
-    /**
      * Render list button.
      *
      * @return string
@@ -306,11 +296,6 @@ HTML;
      */
     protected function renderCustomTools($tools)
     {
-        if ($this->form->isCreating()) {
-            $this->disableView();
-            $this->disableDelete();
-        }
-
         if (empty($tools)) {
             return '';
         }

@@ -40,16 +40,7 @@ class SwitchGroup extends AbstractDisplayer
 
     protected function buildSwitch($name, $label = '')
     {
-        $class = 'grid-switch-'.str_replace('.', '-', $name);
-
-        $keys = collect(explode('.', $name));
-        if ($keys->isEmpty()) {
-            $key = $name;
-        } else {
-            $key = $keys->shift().$keys->reduce(function ($carry, $val) {
-                return $carry."[$val]";
-            });
-        }
+        $class = "grid-switch-{$name}";
 
         $script = <<<EOT
 
@@ -67,7 +58,7 @@ $('.$class').bootstrapSwitch({
             url: "{$this->grid->resource()}/" + pk,
             type: "POST",
             data: {
-                "$key": value,
+                $name: value,
                 _token: LA.token,
                 _method: 'PUT'
             },

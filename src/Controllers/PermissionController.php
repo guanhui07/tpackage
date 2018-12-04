@@ -2,6 +2,7 @@
 
 namespace Encore\Admin\Controllers;
 
+use Encore\Admin\Auth\Database\Permission;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
@@ -82,9 +83,7 @@ class PermissionController extends Controller
      */
     protected function grid()
     {
-        $permissionModel = config('admin.database.permissions_model');
-
-        $grid = new Grid(new $permissionModel());
+        $grid = new Grid(new Permission());
 
         $grid->id('ID')->sortable();
         $grid->slug(trans('admin.slug'));
@@ -132,9 +131,7 @@ class PermissionController extends Controller
      */
     protected function detail($id)
     {
-        $permissionModel = config('admin.database.permissions_model');
-
-        $show = new Show($permissionModel::findOrFail($id));
+        $show = new Show(Permission::findOrFail($id));
 
         $show->id('ID');
         $show->slug(trans('admin.slug'));
@@ -174,9 +171,7 @@ class PermissionController extends Controller
      */
     public function form()
     {
-        $permissionModel = config('admin.database.permissions_model');
-
-        $form = new Form(new $permissionModel());
+        $form = new Form(new Permission());
 
         $form->display('id', 'ID');
 
@@ -201,8 +196,6 @@ class PermissionController extends Controller
      */
     protected function getHttpMethodsOptions()
     {
-        $permissionModel = config('admin.database.permissions_model');
-
-        return array_combine($permissionModel::$httpMethods, $permissionModel::$httpMethods);
+        return array_combine(Permission::$httpMethods, Permission::$httpMethods);
     }
 }

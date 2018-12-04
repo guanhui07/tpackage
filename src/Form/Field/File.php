@@ -121,13 +121,7 @@ class File extends Field
     {
         $this->renameIfExists($file);
 
-        $path = null;
-
-        if (!is_null($this->storage_permission)) {
-            $path = $this->storage->putFileAs($this->getDirectory(), $file, $this->name, $this->storage_permission);
-        } else {
-            $path = $this->storage->putFileAs($this->getDirectory(), $file, $this->name);
-        }
+        $path = $this->storage->putFileAs($this->getDirectory(), $file, $this->name);
 
         $this->destroy();
 

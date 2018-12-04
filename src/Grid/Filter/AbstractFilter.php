@@ -390,20 +390,6 @@ abstract class AbstractFilter
     }
 
     /**
-     * Set element id.
-     *
-     * @param string $id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $this->formatId($id);
-
-        return $this;
-    }
-
-    /**
      * Get column name of current filter.
      *
      * @return string
