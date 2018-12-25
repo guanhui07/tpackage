@@ -45,4 +45,37 @@
         {!! $content !!}
 
     </section>
+
+      <div class="adminPopup">
+        <img src="/static/images/indextchide.png" class="adminPopup-close">
+        <div class="adminPopup-con">
+            <h4>推瓜网提醒你</h4>
+            <p>公共池资源请尽快领取，</br>八分钟后将重新分配！</p>
+            <div class="adminPopup-conlist">
+                <a>前往领取</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: '/admin/api/remindAdmin',
+                dataType: 'json',
+                success: function(reponse){
+                    if (reponse.code === 200) {
+                        $('.adminPopup').slideDown('slow');
+                    }
+                }
+            })
+        });
+        $(function () {
+            $('.adminPopup-close').click(function () {
+                $('.adminPopup').slideUp('slow');
+                setTimeout( function(){
+                    $('.adminPopup').slideDown('slow');
+                }, 10000);
+            });
+        });
+    </script>
 @endsection
