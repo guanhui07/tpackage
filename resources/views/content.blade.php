@@ -30,6 +30,7 @@
                 </li>
                 @endif
             @endforeach
+
         </ol>
         @endif
         <!-- breadcrumb end -->
@@ -48,6 +49,7 @@
 
 	<div class="adminPopup">
         <img src="/static/images/indextchide.png" class="adminPopup-close">
+        <input id="l_admin_uid" name="" type="hidden" value="{{Admin::user()->id}}" >
         <div class="adminPopup-con">
             <h4>推瓜网提醒你</h4>
             <p>公共池资源请尽快领取，</br>八分钟后将重新分配！</p>
