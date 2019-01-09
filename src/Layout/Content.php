@@ -245,6 +245,7 @@ class Content implements Renderable
             'content'     => $this->build(),
         ];
 
+        $items['content'] = str_replace('<div class="row"><div class="col-md-12">','<div class="row"><div class="col-md-12 cls_body_in">',$items['content']);
         return view('admin::content', $items)->render();
     }
 }
