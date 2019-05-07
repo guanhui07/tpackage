@@ -98,6 +98,7 @@
             // }
         });
         function popupShow(){
+        /*
             var uid = $('#l_admin_uid').val();
             $.ajax({
                 type: 'GET',
@@ -116,6 +117,7 @@
                     }
                 }
             });
+         */
         }
         // 求购弹窗
         function successBuy () {
