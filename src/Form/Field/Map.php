@@ -20,6 +20,7 @@ class Map extends Field
      */
     public static function getAssets()
     {
+        $js = '';
         switch (config('admin.map_provider')) {
             case 'tencent':
                // $js = '//map.qq.com/api/js?v=2.exp';
